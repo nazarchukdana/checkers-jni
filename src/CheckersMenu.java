@@ -7,6 +7,7 @@ public class CheckersMenu {
     private JFrame frame;
 
     public CheckersMenu() {
+        System.loadLibrary("libproj01_lib");
         frame = new JFrame("Checkers");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
