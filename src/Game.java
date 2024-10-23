@@ -9,6 +9,7 @@ public class Game {
     private final int BOARD_SIZE = getBoardSize();
     private final int WHITE_CHECKER = 1;
     private final int BLACK_CHECKER = 2;
+    private int currentPlayer;
 
     public Game() {
         frame = new JFrame("Checkers Game");
@@ -16,8 +17,9 @@ public class Game {
         frame.setLayout(new BorderLayout());
         scoreLabel = new JLabel("White: 0 | Black: 0", JLabel.CENTER);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        currentPlayer = WHITE_CHECKER;
         frame.add(scoreLabel, BorderLayout.NORTH);
-        Dimension boardDimension = new Dimension(80*BOARD_SIZE, 80*BOARD_SIZE);
+        Dimension boardDimension = new Dimension(80 * BOARD_SIZE, 80 * BOARD_SIZE);
         boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
         populateBoard();
@@ -34,6 +36,7 @@ public class Game {
         checkersPanel.setBounds(0, 0, boardDimension.width, boardDimension.height);
         checkersPanel.setOpaque(false);
         populateCheckers();
+        checkersPanel.addMouseListener(new BoardMouseHandler(this));
 
 
         layeredPane.add(boardPanel, Integer.valueOf(0));  // Add the board at the bottom layer
@@ -45,8 +48,11 @@ public class Game {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
     private native int[][] getBoardState();
+
     private native int getBoardSize();
+
     private void populateBoard() {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
@@ -55,7 +61,7 @@ public class Game {
                 if ((row + col) % 2 == 0) {
                     square.setBackground(Color.WHITE);  // White square
                 } else {
-                    square.setBackground(new Color(102,102,102));  // Black square
+                    square.setBackground(new Color(102, 102, 102));  // Black square
                 }
 
                 // Add the square to the board panel
@@ -63,8 +69,9 @@ public class Game {
             }
         }
     }
+
     private void populateCheckers() {
-        int [][] boardState = getBoardState();
+        int[][] boardState = getBoardState();
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 JPanel checker = new JPanel();  // Placeholder for each piece slot
@@ -80,5 +87,42 @@ public class Game {
                 checkersPanel.add(checker);
             }
         }
+    }
+
+    private void updateBoard() {
+        checkersPanel.removeAll();  // Clear current checkers
+        populateCheckers();  // Re-populate checkers based on the updated state
+        checkersPanel.revalidate();
+        checkersPanel.repaint();
+    }
+
+    public boolean moveAndUpdateBoard(int fromRow, int fromCol, int toRow, int toCol) {
+        // Call the native method to move the checker
+        if (moveCheckerJNI(fromRow, fromCol, toRow, toCol)) {
+            currentPlayer = (currentPlayer == WHITE_CHECKER) ? BLACK_CHECKER : WHITE_CHECKER;
+            updateBoard();
+            return true;
+        }
+        else System.out.println(false);
+        return false;
+    }
+
+    private native boolean moveCheckerJNI(int fromRow, int fromCol, int toRow, int toCol);
+
+    public int getBOARD_SIZE() {
+        return BOARD_SIZE;
+    }
+
+    public JPanel getCheckersPanel() {
+        return checkersPanel;
+    }
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+    public int getWHITE_CHECKER(){
+        return WHITE_CHECKER;
+    }
+    public int getBLACK_CHECKER(){
+        return BLACK_CHECKER;
     }
 }

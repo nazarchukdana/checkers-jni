@@ -23,6 +23,14 @@ JNIEXPORT jobjectArray JNICALL Java_Game_getBoardState
 JNIEXPORT jint JNICALL Java_Game_getBoardSize
   (JNIEnv *, jobject);
 
+/*
+ * Class:     Game
+ * Method:    moveCheckerJNI
+ * Signature: (IIII)Z
+ */
+JNIEXPORT jboolean JNICALL Java_Game_moveCheckerJNI
+  (JNIEnv *, jobject, jint, jint, jint, jint);
+
 #ifdef __cplusplus
 }
 #endif

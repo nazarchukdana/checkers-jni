@@ -12,8 +12,8 @@ public class Checker extends JPanel {
         this.fillColor = fillColor;
         this.borderColor = borderColor;
         this.setOpaque(false);
-        addMouseListener(new CheckerClickListener());
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -39,14 +39,11 @@ public class Checker extends JPanel {
     public Dimension getPreferredSize() {
         return new Dimension(80, 80);  // Set the preferred size for the pieces
     }
-    private class CheckerClickListener extends MouseAdapter {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            // Toggle selection state
-            isSelected = !isSelected;
-
-            // Repaint the checker to reflect the change in border color
-            repaint();
-        }
+    public void setSelected(boolean selected) {
+        this.isSelected = selected;
+    }
+    public Color getFillColor(){
+        return fillColor;
     }
 }
+
