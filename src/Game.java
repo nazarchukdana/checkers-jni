@@ -16,11 +16,8 @@ public class Game {
         scoreLabel = new JLabel("White: "+getWhiteScore()+" | Black: "+getBlackScore(), JLabel.CENTER);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
         frame.add(scoreLabel, BorderLayout.NORTH);
+        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         Dimension boardDimension = new Dimension(80 * BOARD_SIZE, 80 * BOARD_SIZE);
-        boardPanel = new JPanel();
-        boardPanel.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
-        populateBoard();
-        frame.add(boardPanel);
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(boardDimension);
         boardPanel = new JPanel();
@@ -37,9 +34,9 @@ public class Game {
 
         layeredPane.add(boardPanel, Integer.valueOf(0));  // Add the board at the bottom layer
         layeredPane.add(checkersPanel, Integer.valueOf(1));  // Add the pieces panel at the top layer
-
+        centerPanel.add(layeredPane);
         // Add the layered pane to the frame
-        frame.add(layeredPane, BorderLayout.CENTER);
+        frame.add(centerPanel, BorderLayout.CENTER);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
