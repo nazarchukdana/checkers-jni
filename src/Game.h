@@ -31,6 +31,62 @@ JNIEXPORT jint JNICALL Java_Game_getBoardSize
 JNIEXPORT jboolean JNICALL Java_Game_moveCheckerJNI
   (JNIEnv *, jobject, jint, jint, jint, jint);
 
+/*
+ * Class:     Game
+ * Method:    getCurrentPlayer
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getCurrentPlayer
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    getWHITE_CHECKER
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getWHITE_1CHECKER
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    getBLACK_CHECKER
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getBLACK_1CHECKER
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    getWhiteScore
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getWhiteScore
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    getBlackScore
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getBlackScore
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    isEndGame
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_Game_isEndGame
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    getWinner
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getWinner
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

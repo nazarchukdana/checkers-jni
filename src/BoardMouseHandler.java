@@ -69,7 +69,7 @@ public class BoardMouseHandler extends MouseAdapter {
         Component[] components = game.getCheckersPanel().getComponents();
         for (int i = 0; i < components.length; i++) {
             if (components[i] == component) {
-                return i / game.getBOARD_SIZE();  // Calculate row based on index and grid size
+                return i / game.getBoardSize();  // Calculate row based on index and grid size
             }
         }
         return -1;
@@ -79,7 +79,7 @@ public class BoardMouseHandler extends MouseAdapter {
         Component[] components = game.getCheckersPanel().getComponents();
         for (int i = 0; i < components.length; i++) {
             if (components[i] == component) {
-                return i % game.getBOARD_SIZE();  // Calculate column based on index and grid size
+                return i % game.getBoardSize();  // Calculate column based on index and grid size
             }
         }
         return -1;
