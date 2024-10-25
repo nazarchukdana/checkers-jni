@@ -1,11 +1,17 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Game {
     private JFrame frame;
     private JPanel boardPanel;
     private JPanel checkersPanel;
     private JLabel scoreLabel;
+    private Border originalBorder;
+    private JPanel lastEnteredSquare;
+    private BoardKeyHandler keyHandler;
 
 
     public Game() {
@@ -29,7 +35,7 @@ public class Game {
         checkersPanel.setBounds(0, 0, boardDimension.width, boardDimension.height);
         checkersPanel.setOpaque(false);
         populateCheckers();
-        checkersPanel.addMouseListener(new BoardMouseHandler(this));
+
 
 
         layeredPane.add(boardPanel, Integer.valueOf(0));  // Add the board at the bottom layer
@@ -37,6 +43,10 @@ public class Game {
         centerPanel.add(layeredPane);
         // Add the layered pane to the frame
         frame.add(centerPanel, BorderLayout.CENTER);
+        keyHandler = new BoardKeyHandler(this);
+        frame.addKeyListener(keyHandler);
+        frame.setFocusable(true);
+        frame.requestFocusInWindow();
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -51,12 +61,19 @@ public class Game {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 JPanel square = new JPanel();
+
+                // Set the default border
+
+
                 // Checkerboard pattern: alternate between black and white squares
                 if ((row + col) % 2 == 0) {
                     square.setBackground(Color.WHITE);  // White square
                 } else {
                     square.setBackground(new Color(102, 102, 102));  // Black square
                 }
+
+                // Adding mouse listeners directly to each square
+
 
                 // Add the square to the board panel
                 boardPanel.add(square);
@@ -68,17 +85,18 @@ public class Game {
         int WHITE_CHECKER = getWHITE_CHECKER();
         int BLACK_CHECKER = getBLACK_CHECKER();
         int BOARD_SIZE=getBoardSize();
+        BoardMouseHandler mouseHandler = new BoardMouseHandler(this);
         int[][] boardState = getBoardState();
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 JPanel checker = new JPanel();  // Placeholder for each piece slot
                 checker.setOpaque(false);  // Set transparent by default (for empty spaces)
-
                 if (boardState[row][col] == WHITE_CHECKER) {
                     checker = new Checker(Color.WHITE, Color.GRAY);  // Add a white piece with gray border
                 } else if (boardState[row][col] == BLACK_CHECKER) {
                     checker = new Checker(Color.BLACK, Color.GRAY);  // Add a black piece with gray border
                 }
+                checker.addMouseListener(mouseHandler);
 
                 // Add the piece (or empty transparent slot) to the piecesPanel
                 checkersPanel.add(checker);
@@ -124,4 +142,24 @@ public class Game {
         new EndGame(this);
     }
     public native int getWinner();
+    public native int getSelectedRow();
+    public native int getSelectedColumn();
+    public native void changeSelectedRow(int row);
+    public native void changeSelectedColumn(int col);
+    public native int getClickedRow();
+    public native int getClickedColumn();
+    public native void changeClickedRow(int row);
+    public native void changeClickedColumn(int col);
+    public Border getOriginalBorder(){
+        return originalBorder;
+    }
+    public void changeOriginalBorder(Border border){
+        originalBorder = border;
+    }
+    public JPanel getLastEnteredSquare(){
+        return lastEnteredSquare;
+    }
+    public void changeLastEnteredSquare(JPanel panel){
+        lastEnteredSquare = panel;
+    }
 }

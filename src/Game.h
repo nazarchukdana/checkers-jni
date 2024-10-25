@@ -87,6 +87,70 @@ JNIEXPORT jboolean JNICALL Java_Game_isEndGame
 JNIEXPORT jint JNICALL Java_Game_getWinner
   (JNIEnv *, jobject);
 
+/*
+ * Class:     Game
+ * Method:    getSelectedRow
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getSelectedRow
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    getSelectedColumn
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getSelectedColumn
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    changeSelectedRow
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_Game_changeSelectedRow
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     Game
+ * Method:    changeSelectedColumn
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_Game_changeSelectedColumn
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     Game
+ * Method:    getClickedRow
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getClickedRow
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    getClickedColumn
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_Game_getClickedColumn
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    changeClickedRow
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_Game_changeClickedRow
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     Game
+ * Method:    changeClickedColumn
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_Game_changeClickedColumn
+  (JNIEnv *, jobject, jint);
+
 #ifdef __cplusplus
 }
 #endif
