@@ -55,7 +55,6 @@ public interface Handler {
                 (currentPlayer == getGame().getBLACK_CHECKER() && checkerColor.equals(Color.BLACK));
     }
     private boolean isAnyClicked(){
-        System.out.println(getGame().getClickedRow() != -1 && getGame().getClickedColumn() != -1);
         return getGame().getClickedRow() != -1 && getGame().getClickedColumn() != -1;
     }
 

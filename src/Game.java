@@ -1,10 +1,12 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 public class Game {
+    static {
+        System.loadLibrary("libproj01_lib");
+    }
     private JFrame frame;
     private JPanel boardPanel;
     private JPanel checkersPanel;
@@ -13,8 +15,8 @@ public class Game {
     private JPanel lastEnteredSquare;
     private BoardKeyHandler keyHandler;
 
-
     public Game() {
+        initGame();
         int BOARD_SIZE=getBoardSize();
         frame = new JFrame("Checkers");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,8 +53,9 @@ public class Game {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    public native void initGame();
 
-    private native int[][] getBoardState();
+    public native int[][] getBoardState();
 
     public native int getBoardSize();
 
@@ -61,20 +64,12 @@ public class Game {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 JPanel square = new JPanel();
-
-                // Set the default border
-
-
                 // Checkerboard pattern: alternate between black and white squares
                 if ((row + col) % 2 == 0) {
                     square.setBackground(Color.WHITE);  // White square
                 } else {
                     square.setBackground(new Color(102, 102, 102));  // Black square
                 }
-
-                // Adding mouse listeners directly to each square
-
-
                 // Add the square to the board panel
                 boardPanel.add(square);
             }
@@ -119,11 +114,11 @@ public class Game {
             if(isEndGame()) endGame();
             return true;
         }
+
         return false;
     }
 
     private native boolean moveCheckerJNI(int fromRow, int fromCol, int toRow, int toCol);
-
 
     public JPanel getCheckersPanel() {
         return checkersPanel;
@@ -131,12 +126,17 @@ public class Game {
     public native int getCurrentPlayer();
     public native int getWHITE_CHECKER();
     public native int getBLACK_CHECKER();
-    private native int getWhiteScore();
-    private native int getBlackScore();
-    private void updateScoreLabel(){
+    public native int getWhiteScore();
+    public native int getBlackScore();
+    public native void changeWhiteScore(int score);
+    public native void changeBlackScore(int score);
+    public void updateScoreLabel(){
         scoreLabel.setText("White: "+getWhiteScore()+" | Black: "+getBlackScore());
     }
-    private native boolean isEndGame();
+    public JLabel getScoreLabel(){
+        return scoreLabel;
+    }
+    public native boolean isEndGame();
     private void endGame(){
         frame.dispose();
         new EndGame(this);

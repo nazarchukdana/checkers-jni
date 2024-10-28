@@ -1,9 +1,8 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.*;
 
-public class BoardKeyHandler implements KeyListener, Handler{
+public class BoardKeyHandler implements KeyListener, Handler {
     private Game game;
     public BoardKeyHandler(Game game) {
         this.game = game;

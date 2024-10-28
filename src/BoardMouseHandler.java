@@ -1,10 +1,8 @@
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.*;
-import javax.swing.border.Border;
 
-public class BoardMouseHandler extends MouseAdapter implements Handler{
+public class BoardMouseHandler extends MouseAdapter implements Handler {
     private Game game;
 
     public BoardMouseHandler(Game game) {

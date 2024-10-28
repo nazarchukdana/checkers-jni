@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     Game
+ * Method:    initGame
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_Game_initGame
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
  * Method:    getBoardState
  * Signature: ()[[I
  */
@@ -70,6 +78,22 @@ JNIEXPORT jint JNICALL Java_Game_getWhiteScore
  */
 JNIEXPORT jint JNICALL Java_Game_getBlackScore
   (JNIEnv *, jobject);
+
+/*
+ * Class:     Game
+ * Method:    changeWhiteScore
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_Game_changeWhiteScore
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     Game
+ * Method:    changeBlackScore
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_Game_changeBlackScore
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     Game
