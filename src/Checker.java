@@ -38,7 +38,9 @@ public class Checker extends JPanel {
         return new Dimension(80, 80);  // Set the preferred size for the pieces
     }
     public void setSelected(boolean selected) {
+
         this.isSelected = selected;
+        repaint();
     }
     public Color getFillColor(){
         return fillColor;

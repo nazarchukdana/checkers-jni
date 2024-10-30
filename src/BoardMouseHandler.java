@@ -12,7 +12,9 @@ public class BoardMouseHandler extends MouseAdapter implements Handler {
     @Override
     public void mouseClicked(MouseEvent e) {
         Component clickedComponent = e.getComponent().getComponentAt(e.getPoint());
-        handleCellClick(clickedComponent);
+        int row = getRow(clickedComponent);
+        int col = getCol(clickedComponent);
+        handleCellClick(row, col);
     }
 
     @Override
@@ -20,14 +22,12 @@ public class BoardMouseHandler extends MouseAdapter implements Handler {
         return game;
     }
 
-    // Helper methods to get the row and column of the clicked square
     @Override
     public void mouseEntered(MouseEvent e) {
         Component enteredComponent = e.getComponent().getComponentAt(e.getPoint());
         int row = getRow(enteredComponent);
         int col = getCol(enteredComponent);
-        game.changeSelectedRow(row);
-        game.changeSelectedColumn(col);
+        game.changeSelectedCell(row , col);
         highlightCell(enteredComponent);
     }
     @Override

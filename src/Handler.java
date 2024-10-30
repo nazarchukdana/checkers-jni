@@ -2,29 +2,22 @@ import javax.swing.*;
 import java.awt.*;
 
 public interface Handler {
-    default void handleCellClick(Component clickedComponent) {
-        int row = getRow(clickedComponent);
-        int col = getCol(clickedComponent);
-        if (clickedComponent instanceof Checker) {
-            Checker clickedChecker = (Checker) clickedComponent;
-            if (isCurrentPlayerChecker(clickedChecker)) {
-                if (getGame().getClickedRow() == -1 && getGame().getClickedColumn() == -1) {
-                    getGame().changeClickedRow(row);
-                    getGame().changeClickedColumn(col);
-                    clickedChecker.setSelected(true);
-                } else if (getGame().getClickedRow() == row && getGame().getClickedColumn() == col) {
-                    clickedChecker.setSelected(false);
-                    getGame().changeClickedRow(-1);
-                    getGame().changeClickedColumn(-1);
-                }
-            } else {
-                System.out.println("Cannot select opponent's checker.");
-            }
-        } else if (isAnyClicked() && getGame().moveAndUpdateBoard(getGame().getClickedRow(), getGame().getClickedColumn(), row, col)) {
-            getGame().changeClickedRow(-1);
-            getGame().changeClickedColumn(-1);
+    default void handleCellClick(int row, int col) {
+        Component clickedComponent = getComponentAtPos(row, col);
+        int result = getGame().handleCellClick(row, col);
+        if (result == 0) {
+            ((Checker) clickedComponent).setSelected(false);
+        } else if (result == 1) {
+            ((Checker) clickedComponent).setSelected(true);
+        } else if (result == 2) {
+            getGame().updateGame();
+            getGame().getCheckersPanel().repaint();
         }
-        getGame().getCheckersPanel().repaint();
+    }
+    private Component getComponentAtPos(int row, int col){
+        int index = row * getGame().getBoardSize() + col;
+        Component component = getGame().getCheckersPanel().getComponent(index);
+        return component;
     }
 
     default int getRow(Component component) {
@@ -45,17 +38,6 @@ public interface Handler {
             }
         }
         return -1;
-    }
-    private boolean isCurrentPlayerChecker(Checker checker) {
-        int currentPlayer = getGame().getCurrentPlayer(); // Get the current player
-        Color checkerColor = checker.getFillColor(); // Assuming Checker has a method to get fill color
-
-        // Check if the checker color matches the current player
-        return (currentPlayer == getGame().getWHITE_CHECKER() && checkerColor.equals(Color.WHITE)) ||
-                (currentPlayer == getGame().getBLACK_CHECKER() && checkerColor.equals(Color.BLACK));
-    }
-    private boolean isAnyClicked(){
-        return getGame().getClickedRow() != -1 && getGame().getClickedColumn() != -1;
     }
 
     default void resetLastHighlightedCell() {

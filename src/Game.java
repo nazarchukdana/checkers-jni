@@ -13,10 +13,14 @@ public class Game {
     private JLabel scoreLabel;
     private Border originalBorder;
     private JPanel lastEnteredSquare;
+    private int selectedRow;
+    private int selectedColumn;
     private BoardKeyHandler keyHandler;
 
     public Game() {
         initGame();
+        selectedRow = 0;
+        selectedColumn = 0;
         int BOARD_SIZE=getBoardSize();
         frame = new JFrame("Checkers");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +59,7 @@ public class Game {
     }
     public native void initGame();
 
-    public native int[][] getBoardState();
+    public native int getBoardCell(int row, int col);
 
     public native int getBoardSize();
 
@@ -81,15 +85,15 @@ public class Game {
         int BLACK_CHECKER = getBLACK_CHECKER();
         int BOARD_SIZE=getBoardSize();
         BoardMouseHandler mouseHandler = new BoardMouseHandler(this);
-        int[][] boardState = getBoardState();
+
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
-                JPanel checker = new JPanel();  // Placeholder for each piece slot
-                checker.setOpaque(false);  // Set transparent by default (for empty spaces)
-                if (boardState[row][col] == WHITE_CHECKER) {
-                    checker = new Checker(Color.WHITE, Color.GRAY);  // Add a white piece with gray border
-                } else if (boardState[row][col] == BLACK_CHECKER) {
-                    checker = new Checker(Color.BLACK, Color.GRAY);  // Add a black piece with gray border
+                JPanel checker = new JPanel();
+                checker.setOpaque(false);
+                if (getBoardCell(row, col) == WHITE_CHECKER) {
+                    checker = new Checker(Color.WHITE, Color.GRAY);
+                } else if (getBoardCell(row, col) == BLACK_CHECKER) {
+                    checker = new Checker(Color.BLACK, Color.GRAY);
                 }
                 checker.addMouseListener(mouseHandler);
 
@@ -106,19 +110,11 @@ public class Game {
         checkersPanel.repaint();
     }
 
-    public boolean moveAndUpdateBoard(int fromRow, int fromCol, int toRow, int toCol) {
-        // Call the native method to move the checker
-        if (moveCheckerJNI(fromRow, fromCol, toRow, toCol)) {
+    public void updateGame() {
             updateBoard();
             updateScoreLabel();
             if(isEndGame()) endGame();
-            return true;
-        }
-
-        return false;
     }
-
-    private native boolean moveCheckerJNI(int fromRow, int fromCol, int toRow, int toCol);
 
     public JPanel getCheckersPanel() {
         return checkersPanel;
@@ -142,14 +138,6 @@ public class Game {
         new EndGame(this);
     }
     public native int getWinner();
-    public native int getSelectedRow();
-    public native int getSelectedColumn();
-    public native void changeSelectedRow(int row);
-    public native void changeSelectedColumn(int col);
-    public native int getClickedRow();
-    public native int getClickedColumn();
-    public native void changeClickedRow(int row);
-    public native void changeClickedColumn(int col);
     public Border getOriginalBorder(){
         return originalBorder;
     }
@@ -161,5 +149,16 @@ public class Game {
     }
     public void changeLastEnteredSquare(JPanel panel){
         lastEnteredSquare = panel;
+    }
+    public native int handleCellClick(int row, int col);
+    public void changeSelectedCell(int row, int col){
+        selectedRow = row;
+        selectedColumn = col;
+    }
+    public int getSelectedRow(){
+        return selectedRow;
+    }
+    public int getSelectedColumn(){
+        return selectedColumn;
     }
 }

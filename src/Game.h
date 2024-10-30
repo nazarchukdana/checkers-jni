@@ -17,11 +17,11 @@ JNIEXPORT void JNICALL Java_Game_initGame
 
 /*
  * Class:     Game
- * Method:    getBoardState
- * Signature: ()[[I
+ * Method:    getBoardCell
+ * Signature: (II)I
  */
-JNIEXPORT jobjectArray JNICALL Java_Game_getBoardState
-  (JNIEnv *, jobject);
+JNIEXPORT jint JNICALL Java_Game_getBoardCell
+  (JNIEnv *, jobject, jint, jint);
 
 /*
  * Class:     Game
@@ -30,14 +30,6 @@ JNIEXPORT jobjectArray JNICALL Java_Game_getBoardState
  */
 JNIEXPORT jint JNICALL Java_Game_getBoardSize
   (JNIEnv *, jobject);
-
-/*
- * Class:     Game
- * Method:    moveCheckerJNI
- * Signature: (IIII)Z
- */
-JNIEXPORT jboolean JNICALL Java_Game_moveCheckerJNI
-  (JNIEnv *, jobject, jint, jint, jint, jint);
 
 /*
  * Class:     Game
@@ -113,67 +105,11 @@ JNIEXPORT jint JNICALL Java_Game_getWinner
 
 /*
  * Class:     Game
- * Method:    getSelectedRow
- * Signature: ()I
+ * Method:    handleCellClick
+ * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_Game_getSelectedRow
-  (JNIEnv *, jobject);
-
-/*
- * Class:     Game
- * Method:    getSelectedColumn
- * Signature: ()I
- */
-JNIEXPORT jint JNICALL Java_Game_getSelectedColumn
-  (JNIEnv *, jobject);
-
-/*
- * Class:     Game
- * Method:    changeSelectedRow
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_Game_changeSelectedRow
-  (JNIEnv *, jobject, jint);
-
-/*
- * Class:     Game
- * Method:    changeSelectedColumn
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_Game_changeSelectedColumn
-  (JNIEnv *, jobject, jint);
-
-/*
- * Class:     Game
- * Method:    getClickedRow
- * Signature: ()I
- */
-JNIEXPORT jint JNICALL Java_Game_getClickedRow
-  (JNIEnv *, jobject);
-
-/*
- * Class:     Game
- * Method:    getClickedColumn
- * Signature: ()I
- */
-JNIEXPORT jint JNICALL Java_Game_getClickedColumn
-  (JNIEnv *, jobject);
-
-/*
- * Class:     Game
- * Method:    changeClickedRow
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_Game_changeClickedRow
-  (JNIEnv *, jobject, jint);
-
-/*
- * Class:     Game
- * Method:    changeClickedColumn
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_Game_changeClickedColumn
-  (JNIEnv *, jobject, jint);
+JNIEXPORT jint JNICALL Java_Game_handleCellClick
+  (JNIEnv *, jobject, jint, jint);
 
 #ifdef __cplusplus
 }
