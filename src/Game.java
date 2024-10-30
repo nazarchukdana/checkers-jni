@@ -119,18 +119,12 @@ public class Game {
     public JPanel getCheckersPanel() {
         return checkersPanel;
     }
-    public native int getCurrentPlayer();
     public native int getWHITE_CHECKER();
     public native int getBLACK_CHECKER();
     public native int getWhiteScore();
     public native int getBlackScore();
-    public native void changeWhiteScore(int score);
-    public native void changeBlackScore(int score);
     public void updateScoreLabel(){
         scoreLabel.setText("White: "+getWhiteScore()+" | Black: "+getBlackScore());
-    }
-    public JLabel getScoreLabel(){
-        return scoreLabel;
     }
     public native boolean isEndGame();
     private void endGame(){
