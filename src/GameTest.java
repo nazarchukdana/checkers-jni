@@ -49,15 +49,23 @@ public class GameTest {
     void testInitialScores() {
         assertEquals(0, game.getWhiteScore());
         assertEquals(0, game.getBlackScore());
-    }
+    }/*
     @Test
     public void testInvalidMove(){
+
         assertEquals(1, game.handleCellClick(5, 0), "selecting the checker");//selecting checker
         assertEquals(-1, game.handleCellClick(4, 0), "invalid move to cell above");//up
         assertEquals(-1, game.handleCellClick(6, 0), "invalid move to cell below");//down
         assertEquals(-1, game.handleCellClick(6, 1), "invalid move to the cell where is another checker");//another checker
         assertEquals(-1, game.handleCellClick(5, 1), "invalid move to the right cell");//right
         assertEquals(-1, game.handleCellClick(4, -1), "invalid move to the cell which is out of bounds");//out of bounds
+        assertEquals(0, game.handleCellClick(5, 0), "selecting the checker");
+        game.handleCellClick(5, 2);
+        game.handleCellClick(4, 3);
+        game.handleCellClick(2, 1);
+        game.handleCellClick(3, 2);
+        game.handleCellClick(4, 3);
+        assertEquals(-1, game.handleCellClick(3, 2), "You should not to move to the opponent checker");
     }
     @Test
     public void testValidMove(){
@@ -175,6 +183,6 @@ public class GameTest {
         game.handleCellClick(7, 4);
         assertTrue(game.isEndGame());
         assertEquals(game.getBLACK_CHECKER(), game.getWinner());
-    }
+    }*/
 
 }

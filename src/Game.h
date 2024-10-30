@@ -33,14 +33,6 @@ JNIEXPORT jint JNICALL Java_Game_getBoardSize
 
 /*
  * Class:     Game
- * Method:    getCurrentPlayer
- * Signature: ()I
- */
-JNIEXPORT jint JNICALL Java_Game_getCurrentPlayer
-  (JNIEnv *, jobject);
-
-/*
- * Class:     Game
  * Method:    getWHITE_CHECKER
  * Signature: ()I
  */
@@ -73,22 +65,6 @@ JNIEXPORT jint JNICALL Java_Game_getBlackScore
 
 /*
  * Class:     Game
- * Method:    changeWhiteScore
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_Game_changeWhiteScore
-  (JNIEnv *, jobject, jint);
-
-/*
- * Class:     Game
- * Method:    changeBlackScore
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_Game_changeBlackScore
-  (JNIEnv *, jobject, jint);
-
-/*
- * Class:     Game
  * Method:    isEndGame
  * Signature: ()Z
  */
@@ -105,10 +81,10 @@ JNIEXPORT jint JNICALL Java_Game_getWinner
 
 /*
  * Class:     Game
- * Method:    handleCellClick
+ * Method:    processClick
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_Game_handleCellClick
+JNIEXPORT jint JNICALL Java_Game_processClick
   (JNIEnv *, jobject, jint, jint);
 
 #ifdef __cplusplus
