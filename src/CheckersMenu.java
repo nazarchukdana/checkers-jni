@@ -7,7 +7,6 @@ public class CheckersMenu {
     private JFrame frame;
 
     public CheckersMenu() {
-
         frame = new JFrame("Checkers");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
@@ -25,6 +24,7 @@ public class CheckersMenu {
         titleLabel.setForeground(Color.ORANGE);
         frame.add(titleLabel, gbc);
         gbc.gridy = 1;
+        //
         JButton playButton = new JButton("PLAY");
         playButton.setFont(new Font("Arial", Font.BOLD, 20));
         playButton.setBackground(Color.BLACK);
