@@ -110,13 +110,13 @@ public class Game {
             }
         });
     }
-    public void changeSelectedCell(int row, int col){
+    private void changeSelectedCell(int row, int col){
         if((selectedRow >= 0 && selectedRow < 8) || (selectedColumn >= 0 &&selectedColumn < 8)) {
             selectedRow = row;
             selectedColumn = col;
         }
     }
-    public void handleClick(int row, int col){
+    private void handleClick(int row, int col){
         int result = processClick(row, col);
         CheckerButton clickedButton = getBoardButtonAt(row, col);
         if (clickedButton != null) {
@@ -129,7 +129,7 @@ public class Game {
             }
         }
     }
-    public void highlightSelectedCell(){
+    private void highlightSelectedCell(){
         if (lastSelectedButton != null) {
             lastSelectedButton.setSelected(false);
         }
@@ -140,7 +140,7 @@ public class Game {
             lastSelectedButton = selectedButton;
         }
     }
-    public CheckerButton getBoardButtonAt(int row, int col){
+    private CheckerButton getBoardButtonAt(int row, int col){
         return boardButtons[row][col];
     }
     private void updateGame() {
