@@ -20,6 +20,8 @@ public class Game {
     private final int BOARD_SIZE;
     private final int WHITE_CHECKER;
     private final int BLACK_CHECKER;
+    private final int WHITE_KING;
+    private final int BLACK_KING;
 
     public Game() {
         initGame();
@@ -28,6 +30,8 @@ public class Game {
         BOARD_SIZE=getBoardSize();
         WHITE_CHECKER = getWHITE_CHECKER();
         BLACK_CHECKER = getBLACK_CHECKER();
+        WHITE_KING = getWHITE_KING();
+        BLACK_KING = getBLACK_KING();
         boardButtons = new CheckerButton[BOARD_SIZE][BOARD_SIZE];
         setGUI();
     }
@@ -59,6 +63,7 @@ public class Game {
                 Color squareColor = (row + col) % 2 == 0 ? Color.WHITE : new Color(102, 102, 102);
                 Color checkerColor = null;
                 boolean hasChecker = false;
+                boolean isKing = false;
                 int checker = getBoardCell(row, col);
                 if (checker == WHITE_CHECKER) {
                     checkerColor = Color.WHITE;
@@ -66,9 +71,16 @@ public class Game {
                 } else if (checker == BLACK_CHECKER) {
                     checkerColor = Color.BLACK;
                     hasChecker = true;
+                } else if (checker == WHITE_KING) {
+                    checkerColor = Color.WHITE;
+                    hasChecker = true;
+                    isKing = true;
+                } else if (checker == BLACK_KING) {
+                    checkerColor = Color.BLACK;
+                    hasChecker = true;
+                    isKing = true;
                 }
-
-                CheckerButton checkerButton = new CheckerButton(squareColor, checkerColor, hasChecker, row, col);
+                CheckerButton checkerButton = new CheckerButton(squareColor, checkerColor, hasChecker, isKing, row, col);
                 boardButtons[row][col] = checkerButton;
                 checkerButton.addMouseListener(new MouseListener() {
                     @Override
@@ -165,6 +177,8 @@ public class Game {
     public native int getBoardSize();
     public native int getWHITE_CHECKER();
     public native int getBLACK_CHECKER();
+    public native int getWHITE_KING();
+    public native int getBLACK_KING();
     public native int getWhiteScore();
     public native int getBlackScore();
     public native boolean isEndGame();
