@@ -77,7 +77,7 @@ private:
         currentPlayer = currentPlayer == WHITE_CHECKER? BLACK_CHECKER : WHITE_CHECKER;
     }
     auto isChecker(int row, int col) -> bool {return boardState[row][col] == WHITE_CHECKER || boardState[row][col] == BLACK_CHECKER
-                                                || boardState[row][col] == WHITE_KING || boardState[row][col] == BLACK_KING ;}
+                                                     || boardState[row][col] == WHITE_KING || boardState[row][col] == BLACK_KING ;}
     auto isPlayersChecker(int row, int col) -> bool{
         return boardState[row][col] == currentPlayer || boardState[row][col] == currentPlayer + 2;
     }
@@ -164,8 +164,8 @@ JNIEXPORT jint JNICALL Java_Game_getWHITE_1KING
 }
 JNIEXPORT jint JNICALL Java_Game_getBLACK_1KING
         (JNIEnv *, jobject){
-   return BLACK_KING;
- }
+    return BLACK_KING;
+}
 JNIEXPORT jint JNICALL Java_Game_getWhiteScore
         (JNIEnv * env, jobject jobj){
     return game.getWhiteScore();
