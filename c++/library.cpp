@@ -4,6 +4,8 @@
 const int EMPTY = 0;
 const int WHITE_CHECKER = 1;
 const int BLACK_CHECKER = 2;
+const int WHITE_KING = 3;
+const int BLACK_KING = 4;
 const int BOARD_SIZE = 8;
 class Game{
 private:
@@ -57,7 +59,13 @@ private:
     auto moveChecker(int fromRow, int fromCol, int toRow, int toCol)-> void{
         int checker = boardState[fromRow][fromCol];
         boardState[fromRow][fromCol] = EMPTY;
-        boardState[toRow][toCol] = checker;
+        if (checker == WHITE_CHECKER && toRow == 0) {
+                boardState[toRow][toCol] = WHITE_KING;
+            } else if (checker == BLACK_CHECKER && toRow == BOARD_SIZE - 1) {
+                boardState[toRow][toCol] = BLACK_KING;
+            } else {
+                boardState[toRow][toCol] = checker;
+            }
         if (abs(fromRow - toRow) == 2 && abs(fromCol - toCol) == 2){
             capturingMove(fromRow, fromCol, toRow, toCol);
         }
@@ -146,6 +154,14 @@ JNIEXPORT jint JNICALL Java_Game_getBLACK_1CHECKER
         (JNIEnv * env, jobject jobj){
     return BLACK_CHECKER;
 }
+JNIEXPORT jint JNICALL Java_Game_getWHITE_1KING
+        (JNIEnv *, jobject){
+    return WHITE_KING;
+}
+JNIEXPORT jint JNICALL Java_Game_getBLACK_1KING
+        (JNIEnv *, jobject){
+   return BLACK_KING;
+ }
 JNIEXPORT jint JNICALL Java_Game_getWhiteScore
         (JNIEnv * env, jobject jobj){
     return game.getWhiteScore();
