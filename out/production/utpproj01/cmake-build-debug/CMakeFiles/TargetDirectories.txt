@@ -1,3 +1,0 @@
-C:/учеба/utp/utpproj01/c++/cmake-build-debug/CMakeFiles/proj01_lib.dir
-C:/учеба/utp/utpproj01/c++/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/учеба/utp/utpproj01/c++/cmake-build-debug/CMakeFiles/rebuild_cache.dir
