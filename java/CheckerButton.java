@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 class CheckerButton extends JButton {
     private Color checkerColor;
     private boolean hasChecker;
+    private boolean isKing;
     private boolean isSelected = false;
     private boolean isClicked = false;
     private final int row;
@@ -14,10 +15,11 @@ class CheckerButton extends JButton {
     private final Border originalBorder = BorderFactory.createLineBorder(Color.GRAY, 1);
     private final Border hoveredBorder = BorderFactory.createLineBorder(Color.ORANGE, 2);
 
-    public CheckerButton(Color backgroundColor, Color checkerColor, boolean hasChecker, int row, int col) {
+    public CheckerButton(Color backgroundColor, Color checkerColor, boolean hasChecker, boolean isKing, int row, int col) {
         setBackground(backgroundColor);
         this.checkerColor = checkerColor;
         this.hasChecker = hasChecker;
+        this.isKing = isKing;
         this.row = row;
         this.col = col;
         setContentAreaFilled(false);
@@ -58,6 +60,11 @@ class CheckerButton extends JButton {
             g2d.setColor(isClicked ? Color.ORANGE : Color.GRAY);
             g2d.setStroke(new BasicStroke(3));
             g2d.drawOval(x, y, diameter, diameter);
+            if (isKing) {
+                g2d.setColor(Color.YELLOW);
+                g2d.setStroke(new BasicStroke(4));
+                g2d.drawOval(x - 5, y - 5, diameter + 10, diameter + 10);
+            }
         }
     }
 }
