@@ -59,12 +59,12 @@ private:
     auto moveChecker(int fromRow, int fromCol, int toRow, int toCol)-> void{
         int checker = boardState[fromRow][fromCol];
         boardState[fromRow][fromCol] = EMPTY;
-        if (piece == WHITE_CHECKER && toRow == 0) {
+        if (checker == WHITE_CHECKER && toRow == 0) {
                 boardState[toRow][toCol] = WHITE_KING;
-            } else if (piece == BLACK_CHECKER && toRow == BOARD_SIZE - 1) {
+            } else if (checker == BLACK_CHECKER && toRow == BOARD_SIZE - 1) {
                 boardState[toRow][toCol] = BLACK_KING;
             } else {
-                boardState[toRow][toCol] = piece;
+                boardState[toRow][toCol] = checker;
             }
         if (abs(fromRow - toRow) == 2 && abs(fromCol - toCol) == 2){
             capturingMove(fromRow, fromCol, toRow, toCol);

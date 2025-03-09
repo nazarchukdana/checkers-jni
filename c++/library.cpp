@@ -34,7 +34,7 @@ private:
     }
     auto isOpponentCheckerOnPlace(int row, int col) -> bool{
         int opponent = currentPlayer == WHITE_CHECKER ? BLACK_CHECKER : WHITE_CHECKER;
-        return boardState[row][col] == opponent;
+        return boardState[row][col] == opponent || boardState[row][col] == opponent + 2;
     }
     auto calcOpponentPos(int fromRow, int fromCol, int toRow, int toCol) -> std::vector<int>{
         int opponentRow = (toRow + fromRow) / 2;
@@ -48,7 +48,7 @@ private:
     auto capturingMove(int fromRow, int fromCol, int toRow, int toCol){
         auto opponentPosition = calcOpponentPos(fromRow, fromCol, toRow, toCol);
         boardState[opponentPosition[0]][opponentPosition[1]] = EMPTY;
-        currentPlayer == WHITE_CHECKER? whiteScore++ : blackScore++;
+        currentPlayer == WHITE_CHECKER ? whiteScore++ : blackScore++;
     }
     auto isMoveValid(int fromRow, int fromCol, int toRow, int toCol) -> bool {
         if (toRow < 0 || toCol < 0) return false;
@@ -60,22 +60,23 @@ private:
         int checker = boardState[fromRow][fromCol];
         boardState[fromRow][fromCol] = EMPTY;
         if (checker == WHITE_CHECKER && toRow == 0) {
-                boardState[toRow][toCol] = WHITE_KING;
-            } else if (checker == BLACK_CHECKER && toRow == BOARD_SIZE - 1) {
-                boardState[toRow][toCol] = BLACK_KING;
-            } else {
-                boardState[toRow][toCol] = checker;
-            }
+            boardState[toRow][toCol] = WHITE_KING;
+        } else if (checker == BLACK_CHECKER && toRow == BOARD_SIZE - 1) {
+            boardState[toRow][toCol] = BLACK_KING;
+        } else {
+            boardState[toRow][toCol] = checker;
+        }
         if (abs(fromRow - toRow) == 2 && abs(fromCol - toCol) == 2){
             capturingMove(fromRow, fromCol, toRow, toCol);
         }
     }
     auto changeCurrentPlayer() -> void{
-        currentPlayer = currentPlayer == WHITE_CHECKER ? BLACK_CHECKER : WHITE_CHECKER;
+        currentPlayer = currentPlayer == WHITE_CHECKER? BLACK_CHECKER : WHITE_CHECKER;
     }
-    auto isChecker(int row, int col) -> bool {return boardState[row][col] == WHITE_CHECKER || boardState[row][col] == BLACK_CHECKER;}
+    auto isChecker(int row, int col) -> bool {return boardState[row][col] == WHITE_CHECKER || boardState[row][col] == BLACK_CHECKER
+                                                || boardState[row][col] == WHITE_KING || boardState[row][col] == BLACK_KING ;}
     auto isPlayersChecker(int row, int col) -> bool{
-        return boardState[row][col] == currentPlayer;
+        return boardState[row][col] == currentPlayer || boardState[row][col] == currentPlayer + 2;
     }
     auto isAnyClicked() -> bool{
         return clickedRow != -1 || clickedColumn != -1;

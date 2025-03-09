@@ -1,4 +1,4 @@
-# Install script for directory: C:/учеба/utp/proj01/proj01_lib
+# Install script for directory: C:/учеба/utp/utpproj01/c++
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/учеба/utp/proj01/proj01_lib/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/учеба/utp/utpproj01/c++/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/\u0443\u0447\u0435\u0431\u0430/utp/proj01/proj01_lib/cmake-build-debug",
-		"source" : "C:/\u0443\u0447\u0435\u0431\u0430/utp/proj01/proj01_lib"
+		"build" : "C:/\u0443\u0447\u0435\u0431\u0430/utp/utpproj01/c++/cmake-build-debug",
+		"source" : "C:/\u0443\u0447\u0435\u0431\u0430/utp/utpproj01/c++"
 	},
 	"version" : 
 	{
