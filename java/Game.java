@@ -111,7 +111,7 @@ public class Game {
         });
     }
     private void changeSelectedCell(int row, int col){
-        if((selectedRow >= 0 && selectedRow < 8) || (selectedColumn >= 0 &&selectedColumn < 8)) {
+        if((row >= 0 && row < 8) || (col >= 0 && col < 8)) {
             selectedRow = row;
             selectedColumn = col;
         }
