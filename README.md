@@ -14,6 +14,8 @@ This project is a **exercise in JNI (Java Native Interface) and unit testing**. 
   - Stores the board state and piece positions.
   - Implements movement rules and captures.
   - Enforces Checkers rules (valid moves, jumps, etc.).
+  - Checkers can move in both sides
+  - King role is not implemented
 - **Two-Player Gameplay**
   - Allows two players to play against each other on the same system.
 - **JUnit 5 Unit Testing**
